@@ -1,0 +1,23 @@
+<div class="welcome">
+<% if !@file.errors.empty? %>
+   <div class = "alert alert-error">
+      
+      <ul>
+         <% @file.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+         <% end %>
+      </ul>
+      
+   </div>
+<% end %>
+
+<div class = "well">
+   <%= form_for @file, url: "/students/#{@students_tutor.student_id}/tutors/#{@students_tutor.tutor_id}/files/new" , html: { multipart: true } do |f| %>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+      <%= f.label :attachment %>
+      <%= f.file_field :attachment %>
+      <%= f.submit "Save", class: "btn btn-primary" %>
+   <% end %>
+</div>
+</div>

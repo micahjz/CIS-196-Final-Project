@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+
+<div class = "welcome">
+<div class = "relative">
+<%= form_tag("/shop", method: :update) do %>
+  <a class = "search"><%= label_tag(:q, "Search for:") %></a>
+  <a class = "textfield"><%= text_field_tag(:q) %></a>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<h1>Your Tutors</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Field</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tutors.each do |tutor| %>
+      <% if current_user.tutors.include? tutor %>
+      <tr>
+        <td><%= link_to tutor.name, tutor %></td>
+        <td><%= tutor.email %></td>
+        <td><%= tutor.field %></td>
+        <td><%= link_to 'Drop', "/shop/#{tutor.id}", method: :delete %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h1>Other Tutors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Field</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tutors.each do |tutor| %>
+     <% unless current_user.tutors.include? tutor %>
+      <tr>
+        <td><%= link_to tutor.name, tutor %></td>
+        <td><%= tutor.email %></td>
+        <td><%= tutor.field %></td>
+        <td><%= link_to 'Book', "/book/#{tutor.id}", method: :post %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+
+<div class = "subber">
+<%= link_to 'New Tutor', new_tutor_path %>
+</div>
+</div>

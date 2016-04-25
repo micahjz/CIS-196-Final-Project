@@ -1,0 +1,84 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+html, head, body { 
+    background-color: #e0eee0;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 18%;
+    background-color: #c1cdc1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    margin-top: -10px;
+}
+
+ul li a {
+    display: block;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+ul li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+ul li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
+.welcome {
+	margin-left: 18%;
+}
+.modal
+{
+    width: 900px;
+    margin: auto;
+    height: 400px;
+}
+.modalContent 
+{
+    width: 900px;
+    margin-left: 0px;
+    padding: 0px;
+    position: absolute;
+    left: 0;
+    padding: 10px;
+}
+.schedule
+{
+    width: 100%;
+    margin-bottom: 0px;
+    text-align: left;
+}
+.modalHeader
+{
+    width: 100%;
+}
+.modalFooter
+{
+    width: 100%;
+}
+.modalDialog
+{
+    margin-left: 5px;
+}
+

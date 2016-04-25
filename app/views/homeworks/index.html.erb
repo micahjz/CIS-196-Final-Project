@@ -1,0 +1,40 @@
+<div class = "welcome">
+<% if !flash[:notice].blank? %>
+   <div class = "alert alert-info">
+      <%= flash[:notice] %>
+   </div>
+<% end %>
+
+<br />
+<% unless tutor? %>
+<div class = "new-res">
+<%= link_to "New File", "/students/#{@students_tutor.student_id}/tutors/#{@students_tutor.tutor_id}/files/new", class: "btn btn-primary" %>
+</div>
+<% end %>
+<br />
+
+<table class = "table table-bordered table-striped">
+   <thead>.
+      <tr>
+         <th>Name</th>
+         <th>Description</th>
+         <th>Download Link</th>
+         <th> </th>
+      </tr>
+   </thead>
+   
+   <tbody>
+      <% @files.each do |file| %>
+         
+         <tr>
+            <td><%= file.name %></td>
+            <td><%= file.description %></td>
+            <td><%= link_to "Download File", file.attachment_url %></td>
+            <td><%= button_to "Delete",  "/students/#{@students_tutor.student_id}/tutors/#{@students_tutor.tutor_id}/files/#{file.id}", method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{file.name}?" %></td>
+         </tr>
+         
+      <% end %>
+   </tbody>
+   
+</table>
+</div>

@@ -1,0 +1,26 @@
+
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  <% if tutor? && logged_in? %>
+   <li><a class="nav-btn" href="/students">Students</a></li>
+   <li><a class="nav-btn" href="/tutors">Tutors</a></li>
+  <% elsif !tutor? && logged_in? %>
+   <li><a class="nav-btn" href="/students">Students</a></li>
+   <li><a class="nav-btn" href="/shop">Tutors</a></li>
+  <% else %>
+   <li><a class="nav-btn" href="/students">Students</a></li>
+   <li><a class="nav-btn" href="/tutors">Tutors</a></li>
+  <% end %>
+  <% if logged_in? %>
+   <li><%= link_to current_user.name, current_user %></li>
+   <li><%= link_to 'Log out', logout_path, method: :delete %></li>
+  <% else %>
+   <li><%= link_to 'Log in as Student', login_student_path %></li> 
+   <li><%= link_to 'Log in as Tutor', login_tutor_path %></li> 
+   <li><%= link_to 'Sign up', signup_path %></li>
+  <% end %>
+  <% if logged_in?%>
+  <li><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Meetings</button></li>
+  <% end %>
+</ul>
+

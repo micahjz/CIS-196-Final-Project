@@ -1,0 +1,83 @@
+// Place all the styles related to the students controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1 {
+	text-align: center;
+}
+table, tr, td {
+	font-size: 20px;
+	text-align: left;
+	height: 35px;
+	width: 80 px;
+}
+div + span{
+	margin-top: 100px;
+}
+table th {
+	height: 50px;
+	text-align: left;
+	background-color: #4CAF50;
+    color: white;
+    padding-right: 20px;
+}
+div.relative {
+	position: relative;
+	left: 50px;
+	top: 50px;
+	width: 100%;
+	margin-bottom:60px;
+}
+.subber {
+	position: relative;
+	top: 400;
+	left: 50px;
+}
+#intro {
+	font-size: 30px;
+	text-align: center;
+}
+.larger 
+{
+	font-size: 30px;
+	margin-top: 50px;
+	margin-left: 50px;
+	height: 60px;
+	padding: 2px;
+}
+ol {
+	list-style-type: none;
+	margin-left: 50px
+}
+ol li {
+	display: inline-block;
+	overflow: auto;
+	margin-bottom: 15px;
+	font-size: 18px;
+}
+ol li:last-of-type {
+	margin-bottom: 30px;
+}
+
+.info {
+	margin-left: 50px;
+}
+.collapse
+{
+	display: block;
+}
+html, body {
+	background-color: #e0eee0;
+}
+.select {
+	width: 80px;
+}
+.newuser
+{
+	height: 80px;
+	position: absolute;
+}
+#error_explanation
+{
+	margin-bottom: 100px;
+}

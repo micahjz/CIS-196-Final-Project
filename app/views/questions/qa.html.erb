@@ -1,0 +1,43 @@
+
+<div class = "welcome">
+<h1> 
+	<% if tutor? %>
+	<strong> Questions and answers with <%= Student.find(@students_tutor.student_id).name %></strong>
+	<% else %>
+	<strong> Questions and answers with <%= Tutor.find(@students_tutor.tutor_id).name %></strong>
+	<% end %>
+</h1>
+<div class = "relative">
+<% unless tutor? %>
+<p class = "new">
+	<%= link_to 'New Question', "/questions/#{@students_tutor.id}/new" %>
+</p>
+<% end %>
+
+<% @questions.each do |question| %>
+<div class = "question">  
+	<%= question.text %>
+</div>
+<% unless tutor? %>
+<div class = "delete">
+	<%= link_to 'Delete', "/questions/#{question.students_tutor.id}/#{question.id}", method: :delete %>
+</div>
+<% end %>
+		<% question.comments.each do |comment| %>
+			<div class = "comment">
+			<strong><%= comment.user %>:</strong>
+			<%= comment.text %>
+			</div>
+		<% end %>
+<div class = "form">
+	<%= form_for @comment, url: "/comments/questions/#{question.id}/#{question.students_tutor.id}/new", html: { method: :post } do |f| %>
+  		<div>
+    		<%= f.text_field :text%>
+   	 		<%= f.submit %>
+  		</div>
+	<% end %>
+</div>
+<% end %>
+</div>
+</div>
+

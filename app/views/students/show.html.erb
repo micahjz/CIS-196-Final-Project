@@ -1,0 +1,85 @@
+
+<p id="notice"><%= notice %></p>
+
+<div class = "welcome">
+<p id = "intro">
+	<% if @student == current_user %>
+		<strong>Your student page.</strong>
+	<%elsif tutor? %>
+		<% if current_user.students.include? @student %>
+			<strong>Your student <%=@student.name%>'s page.</strong>
+		<% end %>
+	<% else %>
+		<strong><%=@student.name%>'s student page.</strong>
+	<%end%>
+</p>
+
+<div class = "info">
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+</div>
+
+<div class = "larger">
+<strong>Tutors:</strong>
+<% if @tutor.id %>
+<h4> Schedule a meeting with <%= @tutor.name %> </h4>
+<%= form_for @meeting, url: "/students/#{@student.id}/tutors/#{@tutor.id}", html: { method: :post } do |f| %>
+      <div>
+        <%= f.label :Date%>
+        <%= f.text_field :start, :value => "e.g. 2010-01-30 10:00:00"%>
+        <%= f.submit %>
+      </div>
+  <% end %>
+<% end %>
+</div>
+
+
+
+<% if @tutor.id %>
+<div>
+    <div class = "week">
+          <% @meetings = Tutor.find(@tutor.id).meetings %>
+          <%= week_calendar events: @meetings do |date, meetings| %>
+          <strong class = "day"><%= Time.parse(date.to_s).day %></strong>
+          <ol>
+            <% @meetings.each do |t| %>
+            <% if t.start.to_date === date %>
+            <li class="time"> <%= t.start.hour %>:00 with <%= @student.name %></li>
+            <% end %>
+            <% end %>
+          </ol>
+          <% end %>
+    </div>
+</div>
+<% end %>
+
+<ol>
+  <% @student.tutors.each do |tutor| %>
+  <li>
+    <%= link_to tutor.name, tutor %>
+    for <%= tutor.field %>. You can ask
+    <% a = StudentsTutor.where(student_id: @student.id, tutor_id: tutor.id).first %>
+    <%= link_to "questions", "/questions/#{@student.id}/field/#{a.id}" %> or
+    <%= link_to 'upload a file', "/students/#{@student.id}/tutors/#{tutor.id}/files"%> for <%= tutor.name %> to look at.
+    <% unless @tutor.id %>
+    <%= link_to 'Schedule a meeting', "/students/#{@student.id}/tutors/#{tutor.id}"%> 
+    <% else %>
+    <%= link_to 'Schedule a meeting', "/students/#{@student.id}"%> 
+    <% end %>
+  </li>
+  <% end %>
+</ul>
+<div class = "subber">
+<% if current_user == @student %>
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<% end %>
+<%= link_to 'Back', students_path %>
+</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="welcome">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Starts at:</strong>
+  <%= @meeting.start %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @meeting.students_tutor.student.name %>
+</p>
+
+<p>
+  <strong>Tutor:</strong>
+  <%= @meeting.students_tutor.tutor.name %>
+</p>
+
+<%= link_to 'Back', root_path %>
+<%= link_to 'Delete', meeting_path, method: :delete %>
+</div>
