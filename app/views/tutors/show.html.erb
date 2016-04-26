@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <div class = "welcome">
+<p id="notice"><%= notice %></p>
 <% if logged_in? %>
 	<% if current_user == @tutor %>
 		<h1>Your tutoring page.</h1>
@@ -30,16 +29,19 @@
 <strong>Students:</strong>
 </div>
 
-<ol>
+<ol class = "tutorlist">
   <% @tutor.students.each do |student| %>
   <li class = "tutor_students">
     <%= link_to student.name, student %>
+    <% if current_user == @tutor %>
     <% a = StudentsTutor.where(student_id: student.id, tutor_id: @tutor.id).first %>
     <%= link_to "questions", "/questions/#{student.id}/field/#{a.id}" %> |
     <%= link_to 'files', "/students/#{student.id}/tutors/#{@tutor.id}/files"%> 
+    <% end %>
   </li>
   <% end %>
 </ul>
+</div>
 
 <div class = "subber">
 <% if logged_in? %>

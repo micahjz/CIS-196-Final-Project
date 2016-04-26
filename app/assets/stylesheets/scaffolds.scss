@@ -65,9 +65,13 @@ div {
     background-color: #c00;
     color: #fff;
   }
-
+  ul {
+    height: 50px;
+    margin-top: 52px;
+  }
   ul li {
     font-size: 12px;
     list-style: square;
+    height: 50px;
   }
 }

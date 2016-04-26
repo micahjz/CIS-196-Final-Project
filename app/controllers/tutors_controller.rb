@@ -42,14 +42,7 @@ class TutorsController < ApplicationController
   # GET /tutors/1
   # GET /tutors/1.json
   def show
-    if logged_in? && tutor?
-      if current_user == @tutor
-        str = "Th, 14 April 2016, 01:20:00 (UTC)"
-        date = DateTime.parse str
-        @meetings = []
-        @meetings.append Meeting.new(students_tutor_id: 1, start: date)
-      end
-    end
+    @tutor = Tutor.find(params[:id])
   end
 
   # GET /tutors/new
@@ -59,6 +52,8 @@ class TutorsController < ApplicationController
 
   # GET /tutors/1/edit
   def edit
+    @tutor = Tutor.find(params[:id])
+    render :edit
   end
 
   # POST /tutors

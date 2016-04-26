@@ -41,13 +41,12 @@ div.relative {
 {
 	font-size: 30px;
 	margin-top: 50px;
-	margin-left: 50px;
 	height: 60px;
 	padding: 2px;
+	display: inline-block;
 }
 ol {
 	list-style-type: none;
-	margin-left: 50px
 }
 ol li {
 	display: inline-block;
@@ -57,14 +56,6 @@ ol li {
 }
 ol li:last-of-type {
 	margin-bottom: 30px;
-}
-
-.info {
-	margin-left: 50px;
-}
-.collapse
-{
-	display: block;
 }
 html, body {
 	background-color: #e0eee0;
@@ -79,5 +70,14 @@ html, body {
 }
 #error_explanation
 {
-	margin-bottom: 100px;
+  margin-bottom: 100px;
+}
+.tutorlist
+{
+	margin-left: 0px;
+	margin-top: 5px;
+	width: 90%;
+}
+.week{
+	margin-top: 90px;
 }

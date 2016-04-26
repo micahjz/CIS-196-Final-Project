@@ -27,35 +27,37 @@ class MeetingsController < ApplicationController
   def create
     students_tutor_id = StudentsTutor.where(student_id: params[:id], tutor_id: params[:tutor_id]).first.id
     begin 
-      date = params[:meeting][:start]
-      @meeting = Meeting.new(start: DateTime.parse(date), students_tutor_id: students_tutor_id)
-        if DateTime.parse(date).future? && Tutor.find(params[:tutor_id]).conflict?(DateTime.parse(date)) && Student.find(params[:id]).conflict?(DateTime.parse(date))
-          if @meeting.save
-            redirect_to meeting_path(@meeting.id)
-          else
-            back_to_show
-          end
-        else
-          back_to_show
-        end
+      date = DateTime.parse(params[:meeting][:start])
     rescue
-      back_to_show
+      back_to_show("not valid date format")
+      return
+    end
+    @meeting = Meeting.new(start: date, students_tutor_id: students_tutor_id)
+    if @meeting.save
+      redirect_to "/meetings/#{@meeting.id}"
+    else
+      back_to_show(@meeting.errors.first.second)
     end
   end
 
-  def back_to_show
+  def back_to_show(s)
     @student = Student.find(params[:id])
     @meeting = Meeting.new
+    @meeting.errors.add(:start, s)
     @tutor = Tutor.find(params[:tutor_id])
-    redirect_to "/students/#{params[:id]}/tutors/#{params[:tutor_id]}"
+    respond_to do |format|
+      format.html { render :"students/show" }
+      format.json { render json: @meeting.errors, status: :unprocessable_entity }
+    end
   end
 
 
   # PATCH/PUT /meetings/1
   # PATCH/PUT /meetings/1.json
   def update
+    @meeting = Meeting.find(params[:id])
     respond_to do |format|
-      if @meeting.update(meeting_params)
+      if @meeting.save
         format.html { redirect_to @meeting, notice: 'Meeting was successfully updated.' }
         format.json { render :show, status: :ok, location: @meeting }
       else

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :meetings
+  resources :meetings, only: [:show, :create, :destroy]
   resources :tutors
   resources :students
   # The priority is based upon order of creation: first created -> highest priority.

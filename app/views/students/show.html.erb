@@ -1,7 +1,16 @@
-
-<p id="notice"><%= notice %></p>
-
 <div class = "welcome">
+<p id="notice"><%= notice %></p>
+<% if @meeting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being created:</h2>
+
+      <ol class="newuser">
+      <% @meeting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ol>
+    </div>
+<% end %>
 <p id = "intro">
 	<% if @student == current_user %>
 		<strong>Your student page.</strong>
@@ -14,7 +23,7 @@
 	<%end%>
 </p>
 
-<div class = "info">
+<div class = "relative">
 <p>
   <strong>Name:</strong>
   <%= @student.name %>
@@ -24,7 +33,6 @@
   <strong>Email:</strong>
   <%= @student.email %>
 </p>
-</div>
 
 <div class = "larger">
 <strong>Tutors:</strong>
@@ -33,14 +41,12 @@
 <%= form_for @meeting, url: "/students/#{@student.id}/tutors/#{@tutor.id}", html: { method: :post } do |f| %>
       <div>
         <%= f.label :Date%>
-        <%= f.text_field :start, :value => "e.g. 2010-01-30 10:00:00"%>
+        <%= f.text_field :start, :value => Date.today.to_s + " 10:00:00"%> 
         <%= f.submit %>
       </div>
   <% end %>
 <% end %>
 </div>
-
-
 
 <% if @tutor.id %>
 <div>
@@ -60,7 +66,7 @@
 </div>
 <% end %>
 
-<ol>
+<ol class="tutorlist">
   <% @student.tutors.each do |tutor| %>
   <li>
     <%= link_to tutor.name, tutor %>
@@ -76,6 +82,8 @@
   </li>
   <% end %>
 </ul>
+</div>
+
 <div class = "subber">
 <% if current_user == @student %>
 <%= link_to 'Edit', edit_student_path(@student) %> |
