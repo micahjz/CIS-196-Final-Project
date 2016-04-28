@@ -17,8 +17,7 @@ class TutorsController < ApplicationController
 
   def drop
     @tutor = Tutor.find(params[:id])
-    current_user.tutors.delete @tutor
-    current_user.save
+    StudentsTutor.where(student_id: current_user.id, tutor_id: @tutor.id).first.destroy
     redirect_to '/shop'
   end
 
