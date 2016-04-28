@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
   def delete
     @question = Question.find(params[:question_id])
     @question.destroy
-    qa
+    render :qa
   end
 
 
