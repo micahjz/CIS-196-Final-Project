@@ -13,19 +13,19 @@ class Tutor < ActiveRecord::Base
 	validate :capital_field
 
 	def capital_name
-      if !name.nil?
-        unless /[[:upper:]]/.match(name[0])
-          errors.add(:name, 'name is not capitalized')
-        end
-        errors.add(:name, "name can't be empty") if name.empty?
+    if !name.nil?
+      unless /[[:upper:]]/.match(name[0])
+        errors.add(:name, 'name is not capitalized')
       end
+      errors.add(:name, "name can't be empty") if name.empty?
+    end
   end
 
   def capital_field
-  if !field.nil?
-    unless /[[:upper:]]/.match(field[0])
-      errors.add(:field, 'field is not capitalized')
-    end
+    if !field.nil?
+      unless /[[:upper:]]/.match(field[0])
+        errors.add(:field, 'field is not capitalized')
+      end
       errors.add(:field, "field can't be empty") if field.empty?
     end
   end

@@ -8,7 +8,6 @@ class Student < ActiveRecord::Base
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
 	has_many :students_tutors, dependent: :destroy
 	has_many :tutors, through: :students_tutors
-
 	validate :capital_name
 
   def capital_name

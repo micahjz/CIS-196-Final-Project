@@ -59,7 +59,6 @@ class TutorsController < ApplicationController
   # POST /tutors.json
   def create
     @tutor = Tutor.new(tutor_params)
-
     respond_to do |format|
       if @tutor.save
         session[:user_id] = @tutor.id
@@ -99,13 +98,13 @@ class TutorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tutor
-      @tutor = Tutor.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tutor
+    @tutor = Tutor.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def tutor_params
-      params.require(:tutor).permit(:name, :password_hash, :email, :field)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def tutor_params
+    params.require(:tutor).permit(:name, :password_hash, :email, :field)
+  end
 end
